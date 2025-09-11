@@ -1,7 +1,7 @@
 # Дипломная работа профессии "Python-разработчик"
 
 ## Руководство по запуску
-1. Клонировать репозиторий: `git clone git@github.com:SkuratovichRS/netology_diploma.git`
+1. Клонировать репозиторий: `git clone https://github.com/rs-sku/netology-diploma.git`
 2. Создать виртуальное окружение: `python -m venv .venv`
 3. Активировать виртуальное окружение: `source venv/bin/activate` (На виндовс: `venv\Scripts\activate`)
 4. Установить зависимости: pip install -r `requirements.txt`
