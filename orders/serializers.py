@@ -15,7 +15,10 @@ class OrderSerializer(serializers.ModelSerializer):
         }
 
     def update(self, instance: Order, validated_data: dict) -> Order:
-        if validated_data.get("status") == "confirmed" and validated_data.get("address") is not None:
+        if (
+            validated_data.get("status") == "confirmed"
+            and validated_data.get("address") is not None
+        ):
             send_mail(
                 "Подтверждение заказа",
                 f"Заказ #{instance.id} подтвержден",

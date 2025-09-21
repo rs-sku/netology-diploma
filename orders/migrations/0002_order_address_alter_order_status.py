@@ -6,21 +6,24 @@ import orders.models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('orders', '0001_initial'),
+        ("orders", "0001_initial"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='order',
-            name='address',
-            field=models.CharField(default='address', max_length=150),
+            model_name="order",
+            name="address",
+            field=models.CharField(default="address", max_length=150),
             preserve_default=False,
         ),
         migrations.AlterField(
-            model_name='order',
-            name='status',
-            field=models.CharField(default='created', max_length=150, validators=[orders.models.validate_status]),
+            model_name="order",
+            name="status",
+            field=models.CharField(
+                default="created",
+                max_length=150,
+                validators=[orders.models.validate_status],
+            ),
         ),
     ]

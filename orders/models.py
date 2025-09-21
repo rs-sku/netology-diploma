@@ -10,9 +10,13 @@ def validate_status(value: str) -> str:
 
 class Order(models.Model):
     dt = models.DateTimeField(auto_now_add=True)
-    status = models.CharField(max_length=150, null=False, default="created", validators=[validate_status])
+    status = models.CharField(
+        max_length=150, null=False, default="created", validators=[validate_status]
+    )
     address = models.CharField(max_length=150, null=True, blank=True)
-    user = models.ForeignKey("users.User", on_delete=models.CASCADE, related_name="orders")
+    user = models.ForeignKey(
+        "users.User", on_delete=models.CASCADE, related_name="orders"
+    )
 
     def __str__(self):
         return f"Order #{self.id}"
@@ -25,9 +29,15 @@ class Order(models.Model):
 
 class OrderItem(models.Model):
     quantity = models.IntegerField(null=False)
-    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name="orders_items")
-    product = models.ForeignKey("products.Product", on_delete=models.CASCADE, related_name="orders_items")
-    shop = models.ForeignKey("products.Shop", on_delete=models.CASCADE, related_name="orders_items")
+    order = models.ForeignKey(
+        Order, on_delete=models.CASCADE, related_name="orders_items"
+    )
+    product = models.ForeignKey(
+        "products.Product", on_delete=models.CASCADE, related_name="orders_items"
+    )
+    shop = models.ForeignKey(
+        "products.Shop", on_delete=models.CASCADE, related_name="orders_items"
+    )
 
     def __str__(self):
         return f"Order item #{self.id}"
@@ -41,7 +51,9 @@ class OrderItem(models.Model):
 class Contact(models.Model):
     type = models.CharField(max_length=150, null=False)
     value = models.CharField(max_length=150, null=False)
-    user = models.ForeignKey("users.User", on_delete=models.CASCADE, related_name="contacts")
+    user = models.ForeignKey(
+        "users.User", on_delete=models.CASCADE, related_name="contacts"
+    )
 
     def __str__(self):
         return f"Contact #{self.id}"

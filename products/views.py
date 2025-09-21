@@ -11,7 +11,6 @@ from products.serializers import ImportSerializer, ProductSerializer
 
 
 class ImportView(APIView):
-
     def get_permissions(self) -> list:
         return [IsAuthenticated(), IsShopPermission()]
 
@@ -34,7 +33,9 @@ class ImportView(APIView):
                 serializer.create_category(category["id"], category["name"])
             for product in data["goods"]:
                 try:
-                    product_object = serializer.create_product(product["id"], product["name"], product["category"])
+                    product_object = serializer.create_product(
+                        product["id"], product["name"], product["category"]
+                    )
                     product_info_object = serializer.create_product_info(
                         product["model"],
                         product["quantity"],
@@ -43,9 +44,13 @@ class ImportView(APIView):
                         product_object,
                         shop_object,
                     )
-                    for parameter_name, parameter_value in product["parameters"].items():
+                    for parameter_name, parameter_value in product[
+                        "parameters"
+                    ].items():
                         parameter_object = serializer.create_parameter(parameter_name)
-                        serializer.create_product_parameter(parameter_value, parameter_object, product_info_object)
+                        serializer.create_product_parameter(
+                            parameter_value, parameter_object, product_info_object
+                        )
                 except IntegrityError:
                     continue
 
@@ -57,7 +62,9 @@ class ImportView(APIView):
 
 class ListProductsView(APIView):
     def get(self, request: Request) -> Response:
-        queryset = Product.objects.prefetch_related("infos", "infos__product_parameters").all()
+        queryset = Product.objects.prefetch_related(
+            "infos", "infos__product_parameters"
+        ).all()
         serializer = ProductSerializer(queryset, many=True)
         return Response(serializer.data)
 
@@ -65,7 +72,9 @@ class ListProductsView(APIView):
 class ProductView(APIView):
     def get(self, request: Request, pk: int) -> Response:
         try:
-            product = Product.objects.prefetch_related("infos", "infos__product_parameters").get(id=pk)
+            product = Product.objects.prefetch_related(
+                "infos", "infos__product_parameters"
+            ).get(id=pk)
         except Product.DoesNotExist:
             return Response(data={"error": "Product not found"}, status=404)
 

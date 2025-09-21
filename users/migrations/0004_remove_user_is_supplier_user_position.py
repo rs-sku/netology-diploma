@@ -4,19 +4,18 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('users', '0003_alter_recoverycode_options_alter_user_options'),
+        ("users", "0003_alter_recoverycode_options_alter_user_options"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='user',
-            name='is_supplier',
+            model_name="user",
+            name="is_supplier",
         ),
         migrations.AddField(
-            model_name='user',
-            name='position',
+            model_name="user",
+            name="position",
             field=models.CharField(blank=True, max_length=150),
         ),
     ]

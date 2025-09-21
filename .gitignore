@@ -161,3 +161,4 @@ cython_debug/
 .vscode
 volumes
 tmp
+.ruff_cache

@@ -4,18 +4,25 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('users', '0002_alter_user_email_alter_user_first_name_and_more'),
+        ("users", "0002_alter_user_email_alter_user_first_name_and_more"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='recoverycode',
-            options={'ordering': ('created_at',), 'verbose_name': 'Код восстановления', 'verbose_name_plural': 'Список кодов восстановления'},
+            name="recoverycode",
+            options={
+                "ordering": ("created_at",),
+                "verbose_name": "Код восстановления",
+                "verbose_name_plural": "Список кодов восстановления",
+            },
         ),
         migrations.AlterModelOptions(
-            name='user',
-            options={'ordering': ('last_name',), 'verbose_name': 'Пользователь', 'verbose_name_plural': 'Список пользователей'},
+            name="user",
+            options={
+                "ordering": ("last_name",),
+                "verbose_name": "Пользователь",
+                "verbose_name_plural": "Список пользователей",
+            },
         ),
     ]

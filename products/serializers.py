@@ -1,7 +1,13 @@
 from rest_framework import serializers
 
-from products.models import (Category, Parameter, Product, ProductInfo,
-                             ProductParameter, Shop)
+from products.models import (
+    Category,
+    Parameter,
+    Product,
+    ProductInfo,
+    ProductParameter,
+    Shop,
+)
 
 
 class ImportSerializer:
@@ -16,10 +22,21 @@ class ImportSerializer:
         return Product.objects.create(id=product_id, name=name, category=category)
 
     def create_product_info(
-        self, name: str, quantity: int, price: float, price_rrc: float, product: Product, shop: Shop
+        self,
+        name: str,
+        quantity: int,
+        price: float,
+        price_rrc: float,
+        product: Product,
+        shop: Shop,
     ) -> ProductInfo:
         return ProductInfo.objects.create(
-            name=name, quantity=quantity, price=price, price_rrc=price_rrc, product=product, shop=shop
+            name=name,
+            quantity=quantity,
+            price=price,
+            price_rrc=price_rrc,
+            product=product,
+            shop=shop,
         )
 
     def create_parameter(self, name: str) -> Parameter:
@@ -28,12 +45,14 @@ class ImportSerializer:
     def create_product_parameter(
         self, value: str, parameter: Parameter, product_info: ProductInfo
     ) -> ProductParameter:
-        return ProductParameter.objects.create(value=value, parameter=parameter, product_info=product_info)
+        return ProductParameter.objects.create(
+            value=value, parameter=parameter, product_info=product_info
+        )
 
 
 class ProductParameterSerializer(serializers.ModelSerializer):
     parameter = serializers.ReadOnlyField(source="parameter.name")
-    
+
     class Meta:
         model = ProductParameter
         fields = ("parameter", "value")
@@ -45,7 +64,14 @@ class ProductInfoSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ProductInfo
-        fields = ("name", "quantity", "price", "price_rrc", "shop", "product_parameters")
+        fields = (
+            "name",
+            "quantity",
+            "price",
+            "price_rrc",
+            "shop",
+            "product_parameters",
+        )
 
 
 class ProductSerializer(serializers.ModelSerializer):
